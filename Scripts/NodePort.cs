@@ -235,6 +235,16 @@ namespace XNode {
             return result;
         }
 
+        public IEnumerator<NodePort> GetEnumerator()
+        {
+            for (int i = 0; i < connections.Count; i++) {
+                NodePort port = GetConnection(i);
+                if (port != null){
+                    yield return port;
+                }
+            }
+        }
+
         public NodePort GetConnection(int i) {
             //If the connection is broken for some reason, remove it.
             if (connections[i].node == null || string.IsNullOrEmpty(connections[i].fieldName)) {
